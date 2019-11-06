@@ -1,0 +1,12 @@
+.gradle
+.classpath
+.project
+.settings
+
+/bin/
+/build/
+/run-local/*.jar
+
+*.class
+*.war
+*.ear

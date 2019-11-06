@@ -1,0 +1,35 @@
+########
+# PORT #
+########
+server:
+  port: 8282
+  number-of-threads: 20
+
+spring:
+############
+# LANGUAGE #
+############
+  mvc:
+    locale: en_US
+    locale-resolver: fixed
+############
+# DATABASE #
+############
+  datasource:
+    url: jdbc:postgresql://localhost:5432/happyserver 
+    username: happyserver 
+    password: happyserver   
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+      dialect: org.hibernate.dialect.PostgreSQL9Dialect
+    # show_sql: true
+    properties.hibernate.temp.use_jdbc_metadata_defaults: false
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+###########
+# LOGGING #
+###########
+logging:
+  level:
+    root: INFO
+    

@@ -1,0 +1,53 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.9.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'java'
+    id 'eclipse'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    jcenter()
+}
+
+ext {
+	assertjVersion = '3.8.0'
+    apacheCommonsVersion = '3.6'
+    gsonVersion = '2.8.2'
+    lombokVersion = '1.16.18'
+	springfoxVersion = '2.9.2'
+    springCloudVersion = 'Greenwich.SR3'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+dependencies {
+    
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: "${lombokVersion}"
+    testCompileOnly group: 'org.projectlombok', name: 'lombok', version: "${lombokVersion}"
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: "${lombokVersion}"
+	testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: "${lombokVersion}"
+    
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-hateoas'
+    compile group: 'org.springframework.data', name: 'spring-data-rest-webmvc'
+    
+    compile group: 'com.google.code.gson', name: 'gson', version: "${gsonVersion}"    
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: "${apacheCommonsVersion}"
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: "${springfoxVersion}"
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: "${springfoxVersion}"
+    
+    runtime group: 'org.postgresql', name: 'postgresql'
+
+    testCompile group: 'junit', name: 'junit'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+    testCompile group: 'org.assertj', name: 'assertj-core', version: "${assertjVersion}"
+    testRuntime group: 'com.h2database', name: 'h2'
+}

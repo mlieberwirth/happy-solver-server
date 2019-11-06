@@ -1,0 +1,14 @@
+version: '2'
+services:
+  postgresql:
+    image: postgres:9.6-alpine
+    environment:
+      POSTGRES_USER: happyserver
+      POSTGRES_PASSWORD: happyserver
+    ports:
+    - 5432:5432/tcp
+    volumes:
+    - data_happy_server:/var/lib/postgresql/data
+volumes:
+  data_happy_server:
+    external: true
