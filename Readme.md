@@ -36,7 +36,7 @@ after that a executable jar is under /build/libs/. Run it with
 
 ### With bash
 
-Execute ``./build-and-run.sh`` in folder run-local. Relevant application.yml is in same folder.
+Execute ``./build-copy.sh && ./run.sh`` in folder run-local. Relevant application.yml is in same folder.
 
 ## RESTful Web Service endpoints
 

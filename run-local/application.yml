@@ -3,8 +3,23 @@
 ########
 server:
   port: 8282
-
+  number-of-threads: 20
 spring:
+###########
+# PROFILE #
+###########
+  profiles: local
+  application:
+    name: happy-solver-server
+###########
+# MONITOR #
+###########
+  boot:
+    admin:
+      client:
+        url: http://localhost:8283
+        instance:
+          preferIp: true
 ############
 # LANGUAGE #
 ############
@@ -15,9 +30,10 @@ spring:
 # DATABASE #
 ############
   datasource:
-    url: jdbc:postgresql://localhost:5432/happyserver 
-    username: happyserver 
-    password: happyserver   
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/happyserver
+    username: happyserver
+    password: happyserver
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -25,10 +41,24 @@ spring:
     # show_sql: true
     properties.hibernate.temp.use_jdbc_metadata_defaults: false
     database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+#############
+# ACTURATOR #
+#############
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  info:
+    git:
+      mode: full
 ###########
 # LOGGING #
 ###########
 logging:
   level:
-    root: INFO
+    ROOT: INFO
     

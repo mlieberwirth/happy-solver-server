@@ -1,6 +1,8 @@
 plugins {
     id 'org.springframework.boot' version '2.1.9.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'com.gorylenko.gradle-git-properties' version '2.0.0' 
+    
     id 'java'
     id 'eclipse'
 }
@@ -17,8 +19,9 @@ ext {
     apacheCommonsVersion = '3.6'
     gsonVersion = '2.8.2'
     lombokVersion = '1.16.18'
-	springfoxVersion = '2.9.2'
+    springAdminVersion= '2.1.6'
     springCloudVersion = 'Greenwich.SR3'
+	springfoxVersion = '2.9.2'
 }
 
 dependencyManagement {
@@ -35,10 +38,13 @@ dependencies {
 	testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: "${lombokVersion}"
     
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-hateoas'
     compile group: 'org.springframework.data', name: 'spring-data-rest-webmvc'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
     
+    compile group: 'de.codecentric', name: 'spring-boot-admin-starter-client', version: "${springAdminVersion}"    
     compile group: 'com.google.code.gson', name: 'gson', version: "${gsonVersion}"    
     compile group: 'org.apache.commons', name: 'commons-lang3', version: "${apacheCommonsVersion}"
     compile group: 'io.springfox', name: 'springfox-swagger2', version: "${springfoxVersion}"
@@ -49,5 +55,12 @@ dependencies {
     testCompile group: 'junit', name: 'junit'
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
     testCompile group: 'org.assertj', name: 'assertj-core', version: "${assertjVersion}"
-    testRuntime group: 'com.h2database', name: 'h2'
+}
+
+bootRun {
+   jvmArgs = ["-Dspring.cloud.config.profile=local", "-Dspring.profiles.active=local"]
+}
+
+gitProperties {
+    keys = ['git.branch','git.commit.id.abbrev','git.commit.message.short','git.build.version']
 }
