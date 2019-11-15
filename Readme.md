@@ -56,3 +56,10 @@ The REST-Api is documented by swagger2. If the server is running on localhost wi
 ## Test
 - Write MVC-Tests
 - Write JUnit tests
+
+## Others
+- Errorhandling
+- Model-Size limit
+- Picture how microservices play together
+- Run script with if else
+- link travis

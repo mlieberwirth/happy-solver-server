@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import happysolverserver.persistence.BinPackingModel;
+import happysolverserver.persistence.BinPackingSolution;
 import happysolverserver.service.BinPackingModelService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,6 +29,12 @@ public class BinPackingController {
 
 	@Autowired
 	private BinPackingModelService modelService;
+
+	@PostMapping("/solution")
+	public void sendSolution(@RequestBody BinPackingSolution solution) {
+		// TODO
+		log.info("Receive solution.");
+	}
 
 	@GetMapping("/models")
 	public CompletableFuture<List<BinPackingModel>> getAllModels() {

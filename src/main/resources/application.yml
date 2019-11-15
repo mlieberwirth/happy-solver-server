@@ -3,7 +3,16 @@
 ########
 server:
   port: 8282
+  # number threads for rest calls
   number-of-threads: 20
+  # after this time we remove agents
+  disable-agent-millis: 10000 # 10 sec
+#############
+# SCHEDULER #
+#############
+scheduler:
+  # check for instance if agents are outdated
+  update-agent-interval-millis: 5000 # 5 sec
 spring:
 ###########
 # PROFILE #

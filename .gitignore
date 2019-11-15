@@ -5,8 +5,9 @@
 
 /bin/
 /build/
-/run-local/*.jar
-
+/run-local/*
+! /run-local/*.sh
+! /run-local/*.yml
 *.class
 *.war
 *.ear

@@ -21,6 +21,9 @@ public class ServerConfiguration {
 	@Value("${server.number-of-threads}")
 	private Integer numberOfThreads;
 
+	@Value("${server.disable-agent-millis}")
+	private Long disableAgentMillis;
+
 	@Bean(name = "rest-thread-pool")
 	public ThreadPoolTaskScheduler createRESTThreadPool() {
 		return createThreadPool("REST-Pool");
