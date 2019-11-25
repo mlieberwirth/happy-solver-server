@@ -1,0 +1,64 @@
+########
+# PORT #
+########
+server:
+  port: 8282
+  # number threads for rest calls
+  number-of-threads: 20
+  # after this time we remove agents
+  disable-agent-millis: 10000 # 10 sec
+#############
+# SCHEDULER #
+#############
+scheduler:
+  # check for instance if agents are outdated
+  update-agent-interval-millis: 5000 # 5 sec
+spring:
+###########
+# PROFILE #
+###########
+  application:
+    name: happy-solver-server
+############
+# LANGUAGE #
+############
+  mvc:
+    locale: en_US
+    locale-resolver: fixed
+############
+# DATABASE #
+############
+  h2:
+    console:
+      enabled: false
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+    username: happyserver
+    password: happyserver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    # show_sql: true
+    properties.hibernate.temp.use_jdbc_metadata_defaults: false
+#############
+# ACTURATOR #
+#############
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  info:
+    git:
+      mode: full
+###########
+# LOGGING #
+###########
+logging:
+  level:
+    ROOT: INFO
+    

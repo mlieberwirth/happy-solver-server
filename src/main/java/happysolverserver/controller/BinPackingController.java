@@ -13,38 +13,58 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import happysolverserver.controller.resources.BinPackingModelRest;
+import happysolverserver.controller.resources.BinPackingSolutionRest;
 import happysolverserver.persistence.BinPackingModel;
-import happysolverserver.persistence.BinPackingSolution;
 import happysolverserver.service.BinPackingModelService;
+import happysolverserver.service.ReceiveBinPackingModelService;
+import happysolverserver.service.ReceiveBinPackingSolutionService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/binpacking")
+@RequestMapping(BinPackingController.MAPPING)
 public class BinPackingController {
 
+	public static final String MAPPING = "/binpacking";
+	public static final String SOLUTIONS = "/solutions";
+	public static final String MODELS = "/models";
+	public static final String RECEIVE = "/receive";
+
 	@Autowired
-	@Qualifier("rest-thread-pool") // own pool for graceful shutdown
+	@Qualifier("rest-thread-pool")
 	private ThreadPoolTaskScheduler threadPool;
 
 	@Autowired
 	private BinPackingModelService modelService;
 
-	@PostMapping("/solution")
-	public void sendSolution(@RequestBody BinPackingSolution solution) {
-		// TODO
+	@Autowired
+	private ReceiveBinPackingModelService receiveModelService;
+
+	@Autowired
+	private ReceiveBinPackingSolutionService receiveSolutionService;
+
+	@PostMapping(SOLUTIONS + RECEIVE)
+	public CompletableFuture<String> receiveSolution(@RequestBody BinPackingSolutionRest solution) {
 		log.info("Receive solution.");
+		return CompletableFuture.supplyAsync(() -> receiveSolutionService.receiveNewSolution(solution), threadPool);
 	}
 
-	@GetMapping("/models")
+	@GetMapping(MODELS)
 	public CompletableFuture<List<BinPackingModel>> getAllModels() {
 		log.info("Get all models");
 		return CompletableFuture.supplyAsync(modelService::findAll, threadPool);
 	}
 
-	@GetMapping("/models/{id}")
+	@GetMapping(MODELS + "/{id}")
 	public CompletableFuture<BinPackingModel> getModel(@PathVariable("id") Long id) {
 		log.info("Get model " + id);
 		return CompletableFuture.supplyAsync(() -> modelService.findById(id), threadPool);
+	}
+
+	@PostMapping(MODELS + RECEIVE)
+	public CompletableFuture<String> receiveModel(@RequestBody BinPackingModelRest model) {
+		log.info("Receive model.");
+		return CompletableFuture.supplyAsync(() -> receiveModelService.receiveNewModel(model), threadPool);
 	}
 }

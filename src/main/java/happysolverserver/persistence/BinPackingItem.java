@@ -7,8 +7,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Positive;
 
-import com.sun.istack.NotNull;
-
 import lombok.Data;
 
 @Data
@@ -23,7 +21,6 @@ public class BinPackingItem {
 	private Integer amount;
 
 	@ManyToOne
-	@JoinColumn(name = "model_id", nullable = false)
-	@NotNull
+	@JoinColumn(name = "model_id")
 	private BinPackingModel model;
 }
