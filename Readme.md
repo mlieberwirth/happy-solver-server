@@ -44,18 +44,18 @@ The REST-Api is documented by swagger2. If the server is running on localhost wi
 
     http://localhost:8080/swagger-ui.html
 
+## CI
+Build and test results are under [Travis CI](https://travis-ci.org/mlieberwirth/happy-solver-server?utm_medium=notification&utm_source=github_status)
+
 
 # TODO
 
 ## Finish production
-- service for create model
-- controller for create model
-- create BinSolution 
-- add happy-solver
+- Send solution per Mattermost or mail
 
 ## Test
-- Write MVC-Tests
-- Write JUnit tests
+- Improve MVC-Tests
+- Add JUnit tests
 
 ## Others
 - Errorhandling
