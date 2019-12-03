@@ -5,9 +5,9 @@
 
 /bin/
 /build/
-/run-local/*
-! /run-local/*.sh
-! /run-local/*.yml
+/run/run-local/*
+! /run/run-local/*.sh
+! /run/run-local/*.yml
 *.class
 *.war
 *.ear
