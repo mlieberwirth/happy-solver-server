@@ -1,4 +1,7 @@
 # Happy-Solver-Server
+
+DEPRECATED USE https://gitlab.com/happy-solver
+
 [![Build Status](https://img.shields.io/travis/mlieberwirth/happy-solver-server.svg?label=Travis%20CI&logo=travis&style=flat-square)](https://travis-ci.org/mlieberwirth/happy-solver-server)&nbsp;
 
 Runs the [Happy-Solver](https://github.com/mlieberwirth/happy-solver) in a server with a database to store models and results.
